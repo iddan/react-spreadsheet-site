@@ -1,0 +1,48 @@
+.hero {
+  color: white;
+  text-align: center;
+  padding: 90px;
+  padding-bottom: 45px;
+  background: linear-gradient(0deg, rgba(255, 255, 255, 0) 30%, #282c33 0%);
+}
+
+.hero h1 {
+  color: #09d874;
+}
+
+.hero p {
+  color: white;
+  font-weight: 300;
+  font-size: 1.25em;
+}
+
+.Spreadsheet {
+  width: 40em;
+  background: white;
+  margin: auto;
+  box-shadow: 0 1px 20px rgba(0, 0, 0, 0.3);
+  color: black;
+}
+
+.features {
+  max-width: 60em;
+  margin: 16px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: auto;
+}
+
+.features > div {
+  width: 16em;
+  max-width: 100%;
+}
+
+.features > div:not(:first-child) {
+  margin-left: 40px;
+}
+
+.features h3 {
+  font-weight: 300;
+}

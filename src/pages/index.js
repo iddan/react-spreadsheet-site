@@ -1,21 +1,63 @@
-import React from "react"
-import { Link } from "gatsby"
-
+import React, { useState } from "react"
+import { useStaticQuery, graphql } from "gatsby"
 import Layout from "../components/layout"
-import Image from "../components/image"
 import SEO from "../components/seo"
+import Spreadsheet from "react-spreadsheet"
+import "./index.css"
 
-const IndexPage = () => (
-  <Layout>
-    <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
-    </div>
-    <Link to="/page-2/">Go to page 2</Link>
-  </Layout>
-)
+const initialSpreadsheetData = Array(6)
+  .fill(1)
+  .map(() => Array(5))
+
+const IndexPage = () => {
+  const [spreadsheetData, setSpreadsheetData] = useState(initialSpreadsheetData)
+  const {
+    site: {
+      siteMetadata: { title, description },
+    },
+  } = useStaticQuery(graphql`
+    query {
+      site {
+        siteMetadata {
+          title
+          description
+        }
+      }
+    }
+  `)
+  return (
+    <Layout>
+      <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
+      <div className="hero">
+        <h1>{title}</h1>
+        <p>{description}</p>
+        <Spreadsheet data={spreadsheetData} onChange={setSpreadsheetData} />
+      </div>
+      <section className="features">
+        <div>
+          <h3>Simple</h3>
+          <p>
+            Straightforward API focusing on common use cases while keeping
+            flexibility
+          </p>
+        </div>
+        <div>
+          <h3>Performant</h3>
+          <p>
+            Draw and update tables with many columns and rows without
+            virtualization
+          </p>
+        </div>
+        <div>
+          <h3>Just Components™</h3>
+          <p>
+            The Spreadsheet is just a component, compose it easily with other
+            components and data
+          </p>
+        </div>
+      </section>
+    </Layout>
+  )
+}
 
 export default IndexPage
