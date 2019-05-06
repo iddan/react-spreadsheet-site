@@ -1,4 +1,5 @@
 module.exports = {
+  pathPrefix: "/react-spreadsheet",
   siteMetadata: {
     title: `React Spreadsheet`,
     description: `Simple, customizable yet performant spreadsheet for React`,
