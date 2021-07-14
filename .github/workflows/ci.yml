@@ -1,49 +1,41 @@
-# This is a basic workflow to help you get started with Actions
+name: ci
 
-name: CI
-
-# Controls when the action will run.
 on:
-  # Triggers the workflow on push or pull request events but only for the master branch
-  push:
-    branches: [master]
   pull_request:
     branches: [master]
+  push:
+    branches: [master]
 
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
+  checks:
+    if: github.event_name != 'push'
     runs-on: ubuntu-latest
-    # The maximum number of minutes to let a job run before GitHub automatically cancels it
-    timeout-minutes: 6
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
-
-      - name: Cache node modules
-        uses: actions/cache@v2
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
         with:
-          path: |
-            ~/.npm
-            node_modules
-            */*/node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-
-      - name: Install dependencies
-        run: yarn
-
-      - name: Check
-        run: yarn ci
-
-      - name: Deploy
-        run: yarn deploy
-        if: github.ref == 'refs/heads/master'
+          node-version: "12.x"
+      - name: Test Build
+        run: |
+          yarn install --frozen-lockfile;
+          yarn build;
+  gh-release:
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "12.x"
+      - uses: webfactory/ssh-agent@v0.5.0
+        with:
+          ssh-private-key: ${{ secrets.GH_PAGES_DEPLOY }}
+      - name: Release to GitHub Pages
+        env:
+          USE_SSH: true
+          GIT_USER: git
+        run: |
+          git config --global user.email "mail@aniddan.com";
+          git config --global user.name "Iddan Aaronsohn";
+          yarn install --frozen-lockfile;
+          yarn deploy;
