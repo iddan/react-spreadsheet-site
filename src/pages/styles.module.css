@@ -1,0 +1,63 @@
+/**
+ * CSS files with the .module.css suffix will be treated as CSS modules
+ * and scoped locally.
+ */
+
+.heroBanner {
+  padding: 4rem 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+@media screen and (max-width: 966px) {
+  .heroBanner {
+    padding: 2rem;
+  }
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 0 var(--ifm-paragraph-margin-bottom);
+}
+
+.spreadsheetContainer {
+  max-width: 40em;
+  width: 100%;
+  background: white;
+  margin: auto;
+  box-shadow: 0 1px 20px rgba(0, 0, 0, 0.3);
+  color: black;
+}
+
+.spreadsheetContainer :global(.Spreadsheet) {
+  margin: 0;
+}
+
+.spreadsheetContainer :global(.Spreadsheet) table tr:nth-child(2n) {
+  background: var(--ifm-table-background);
+}
+
+.spreadsheetContainer table {
+  margin-bottom: 0;
+  width: auto;
+}
+
+.spreadsheetContainer table th,
+.spreadsheetContainer table td {
+  padding: 4px;
+}
+
+.features {
+  display: flex;
+  align-items: center;
+  padding: 2rem 0;
+  width: 100%;
+}
+
+.featureImage {
+  height: 200px;
+  width: 200px;
+}
