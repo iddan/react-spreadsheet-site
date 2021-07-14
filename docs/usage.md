@@ -20,129 +20,158 @@ const App = () => {
 };
 ```
 
-### Props
+## Props
 
-##### `data` _Required_
+#### `data` _Required_
+
+`Array<Array<CellType>>`
 
 The data matrix of the Spreadsheet.
 First array size will determine how many columns the Spreadsheet will present.
 
-#### Events
+### Events
 
-##### `onChange`
+#### `onChange`
+
+`(data: Array<Array<CellType>>) => void`
 
 Callback called when the Spreadsheet's data changes.
+
 **Defaults to:** `undefined`
 
-##### `onModeChange`
+#### `onModeChange`
+
+`(mode: Mode) => void`
 
 Callback called when the Spreadsheet's edit mode changes.
 
 **Defaults to:** `undefined`
 
-##### `onSelect`
+#### `onSelect`
+
+`(points: Point[]) => void`
 
 Callback called when the Spreadsheet's selection changes.
 
 **Defaults to:** `undefined`
 
-##### `onActivate`
+#### `onActivate`
+
+`(active: Point) => void`
+
+Callback called when Spreadsheet's active cell changes.
 
 **Defaults to:** `undefined`
 
-##### `onCellCommit`
+#### `onCellCommit`
+
+`(prevCell: CellType, nextType: CellType) => void`
 
 **Defaults to:** `undefined`
 
-##### `onKeyDown`
+#### `onKeyDown`
+
+`(event: KeyboardEvent) => void`
 
 Callback called on key down inside the spreadsheet.
 
 **Defaults to:** `undefined`
 
-#### Components
+### Components
 
-##### `ColumnIndicator`
+#### `ColumnIndicator`
 
 Component rendered above each column.
 
 **Defaults to:** internal component.
 
-##### `CornerIndicator`
+#### `CornerIndicator`
 
 Component rendered in the corner of row and column indicators.
 
 **Defaults to:** internal component.
 
-##### `RowIndicator`
+#### `RowIndicator`
 
 Component rendered next to each row.
 
 **Defaults to:** internal component.
 
-##### `Table`
+#### `Table`
 
 The Spreadsheet's table component.
 
 **Defaults to:** internal component.
 
-##### `Row`
+#### `Row`
 
 The Spreadsheet's row component.
 
 **Defaults to:** internal component.
 
-##### `Cell`
+#### `Cell`
 
 The Spreadsheet's cell component.
 
 **Defaults to:** internal component.
 
-##### `DataViewer`
+#### `DataViewer`
 
 Component rendered for cells in read mode.
 
 **Defaults to:** internal component.
 
-##### `DataEditor`
+#### `DataEditor`
 
 Component rendered for cells in edit mode.
 
 **Defaults to:** internal component.
 
-#### Customization
+### Customization
 
-##### `formulaParser`
+#### `formulaParser`
+
+`FormulaParser`
 
 Instance of `FormulaParser` to be used by the Spreadsheet
 
 **Defaults to:** internal instance created by the component.
 
-##### `columnLabels`
+#### `columnLabels`
+
+`Array<string>`
 
 Labels to use in column indicators.
 
 **Defaults to:** alphabetical labels.
 
-##### `rowLabels`
+#### `rowLabels`
+
+`Array<string>`
 
 Labels to use in row indicators.
 
 **Defaults to:** row index labels.
 
-##### `hideRowIndicators`
+#### `hideRowIndicators`
+
+`boolean`
 
 Hides row indicators.
 
 **Defaults to:** `false`.
 
-##### `hideColumnIndicators`
+#### `hideColumnIndicators`
+
+`boolean`
 
 Hides column indicators.
 
 **Defaults to:** `false`.
 
-##### `getBindingsForCell`
+#### `getBindingsForCell`
+
+`(cell: CellType, data: Matrix<CellType>) => Point[]`
 
 Calculate which cells should be updated when given cell updates.
 
